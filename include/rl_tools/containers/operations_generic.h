@@ -33,6 +33,7 @@ namespace rl_tools{
             }
         }
 #endif
+        matrix._data = (typename SPEC::T*)&matrix._data_memory[0];
     }
     template<typename DEVICE, typename SPEC>
     void free(DEVICE& device, MatrixStatic<SPEC>& matrix){

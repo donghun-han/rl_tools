@@ -68,8 +68,8 @@ namespace rl_tools{
 //        // pure virtual function to make this class abstract (should be instantiated by either the MatrixStatic or MatrixDynamic subclasses class)
 //        virtual void _abstract_tag() = 0;
         T* _data = nullptr;
-        Matrix() = default;
-        Matrix(T* data): _data(data){};
+        // Matrix() = default;
+        // Matrix(T* data): _data(data){};
     };
     template<typename T_SPEC>
     struct MatrixDynamic: Matrix<T_SPEC>{
@@ -80,6 +80,7 @@ namespace rl_tools{
         template<typename SPEC::TI ROWS, typename SPEC::TI COLS>
         using VIEW = MatrixDynamic<matrix::Specification<T, TI, ROWS, COLS, typename MatrixDynamic::VIEW_LAYOUT, true>>;
 //        virtual void _abstract_tag(){};
+        // MatrixDynamic(T* data): Matrix<T_SPEC>(data){};
     };
     struct MatrixDynamicTag{
         template<typename T_SPEC>
@@ -96,7 +97,7 @@ namespace rl_tools{
 //        virtual void _abstract_tag(){};
 
         alignas(T) unsigned char _data_memory[SPEC::SIZE_BYTES];
-        MatrixStatic(): Matrix<T_SPEC>((T*)_data_memory){};
+        // MatrixStatic(): Matrix<T_SPEC>((T*)_data_memory){};
     };
     struct MatrixStaticTag{
         template<typename T_SPEC>
