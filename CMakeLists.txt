@@ -35,8 +35,8 @@ option(RL_TOOLS_BACKEND_ENABLE_MKL "Enable the MKL gemm library, only available 
 option(RL_TOOLS_BACKEND_ENABLE_ACCELERATE "Enable the Accelerate gemm library, only available on Apple CPUs" OFF)
 option(RL_TOOLS_BACKEND_ENABLE_CUDA "Enable Nvidia CUDA" OFF)
 option(RL_TOOLS_RL_ENVIRONMENTS_ENABLE_MUJOCO "Enable MuJoCo" OFF)
-option(RL_TOOLS_ENABLE_JSON "Enable JSON (used in the multirotor UI)" OFF)
-option(RL_TOOLS_ENABLE_BOOST_BEAST "Enable BOOST beast (used in the multirotor UI)" OFF)
+option(RL_TOOLS_ENABLE_JSON "Enable JSON (used in the multirotor UI)" ON)
+option(RL_TOOLS_ENABLE_BOOST_BEAST "Enable BOOST beast (used in the multirotor UI)" ON)
 option(RL_TOOLS_HDF5_HIGHFIVE_FROM_CONAN "Use HighFive from conan (don't use the submodule from /external)" OFF)
 option(RL_TOOLS_BUILD_TYPE "Use \"Release\" to e.g. build fat binaries with code for all CUDA architectures (not just for the GPU found in the machine used to build it)" OFF)
 option(RL_TOOLS_INSTALL_INCLUDE_REDISTRIBUTABLES "Including redistributables from the redistributable submodule" OFF)
@@ -207,6 +207,7 @@ endif()
 
 # dependencies
 if(RL_TOOLS_BACKEND_ENABLE_MKL)
+    set(MKL_DIR "~/intel/oneapi/mkl/2024.1/lib/cmake/mkl/")
     find_package(MKL REQUIRED)
     target_compile_definitions(rl_tools_core_definitions INTERFACE RL_TOOLS_BACKEND_ENABLE_MKL)
     target_link_libraries(rl_tools_backend INTERFACE MKL::MKL)
